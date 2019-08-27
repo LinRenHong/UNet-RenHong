@@ -9,7 +9,7 @@ from torch.utils.data import DataLoader
 from PIL import Image
 
 from config import config
-from utils.complier import ModelCompiler, Dice
+from utils.compiler import ModelCompiler, Dice
 from utils.datasets import ReadCsvImageDataSet
 from models.unet import UNet
 
