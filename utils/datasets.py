@@ -38,8 +38,8 @@ class ReadCsvImageDataSet(Dataset):
 
         self.image_A_paths = self.df["Image"]
         self.image_B_paths = self.df["Mask"]
-        self.labels = self.df["Label"]
-        self.fold_index = self.df["FoldIndex"]
+        self.labels = np.array(self.df["Label"])
+        self.fold_index = np.array(self.df["FoldIndex"])
 
 
         self._check_img_A()
