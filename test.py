@@ -51,8 +51,6 @@ if __name__ == '__main__':
     dataset_name = os.path.split(opt.dataset_path)[-1]
 
     model = UNet(3, 1) # UNet(input_channels, output_channels)
-    model.load_state_dict(torch.load(opt.load_model_path))
-
     model_name = model.__class__.__name__
 
     # Pre-train model
@@ -72,10 +70,6 @@ if __name__ == '__main__':
                                             batch_size=opt.val_batch_size,
                                             shuffle=True,
                                             num_workers=opt.n_cpu),  # Thread
-
-        "loss_functions": {"dice_loss": Dice(eps=1.)},
-        "optimizer": lambda model: torch.optim.Adam(model.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2)),
-        # "load_ckpt_from_path": load_ckpt_path,
     }
 
     val_compiler = ModelCompiler(**val_configuration)

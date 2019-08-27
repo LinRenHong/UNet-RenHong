@@ -48,10 +48,12 @@ class ModelCompiler(object):
         self.load_model_path = kwargs.get("load_model_path", None)
 
         # Loss function
-        self.criterion = kwargs.get("loss_functions", None)["dice_loss"]
+        self.criterion = kwargs.get("loss_function", None)
 
         # Optimizer
-        self.optimizer = kwargs.get("optimizer", None)(self.model)
+        self.optimizer = kwargs.get("optimizer", None)
+        if self.optimizer is not None:
+            self.optimizer = self.optimizer(self.model)
 
         # Use GPU
         self.isCuda = True if torch.cuda.is_available() else False

@@ -96,7 +96,7 @@ if __name__ == '__main__':
                                             shuffle=True,
                                             num_workers=4),  # Thread
 
-        "loss_functions": {"dice_loss": Dice(eps=1.)},
+        "loss_function": Dice(eps=1.),
         "optimizer": lambda model: torch.optim.Adam(model.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2)),
         "save_ckpt_in_path": save_ckpt_name,
         "tensorboard_path": os.path.join("tf_log", save_ckpt_name),
