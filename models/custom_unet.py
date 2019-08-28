@@ -13,9 +13,9 @@ from config import config
 
 opt = config
 
-class WoundUNet(UNet):
+class CustomUNet(UNet):
     def __init__(self, n_channels, n_classes):
-        super(WoundUNet, self).__init__(n_channels=n_channels, n_classes=n_classes)
+        super(CustomUNet, self).__init__(n_channels=n_channels, n_classes=n_classes)
 
         test = list(enumerate(self.children()))
         print("Layers amount: {}".format(len(test)))
