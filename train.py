@@ -38,11 +38,11 @@ if __name__ == '__main__':
         transforms.ToTensor(),
     ]
 
-    train_csv_file = opt.dataset_path + "/" + "list.csv"
+    csv_file_path = opt.dataset_path + "/" + "list.csv"
     img_container = opt.dataset_path
 
     # Training dataset read from CSV
-    train_dataset = ReadCsvImageDataSet(csv_file_path_=train_csv_file,
+    train_dataset = ReadCsvImageDataSet(csv_file_path_=csv_file_path,
                                         transforms_=transforms_train,
                                         image_container_=img_container,
                                         mode='train',
@@ -50,7 +50,7 @@ if __name__ == '__main__':
                                         use_grayscale_mask=True)  # True: load mask with grayscale, False: RGB
 
     # Validation dataset read from CSV
-    val_dataset = ReadCsvImageDataSet(csv_file_path_=train_csv_file,
+    val_dataset = ReadCsvImageDataSet(csv_file_path_=csv_file_path,
                                       transforms_=transforms_val,
                                       image_container_=img_container,
                                       mode='val',

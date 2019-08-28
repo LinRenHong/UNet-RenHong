@@ -28,11 +28,11 @@ if __name__ == '__main__':
         transforms.ToTensor(),
     ]
 
-    train_csv_file = opt.dataset_path + "/" + "list.csv"
+    csv_file_path = opt.dataset_path + "/" + "list.csv"
     img_container = opt.dataset_path
 
     # Validation dataset read from CSV
-    val_dataset = ReadCsvImageDataSet(csv_file_path_=train_csv_file,
+    val_dataset = ReadCsvImageDataSet(csv_file_path_=csv_file_path,
                                       transforms_=transforms_val,
                                       image_container_=img_container,
                                       mode='val',
