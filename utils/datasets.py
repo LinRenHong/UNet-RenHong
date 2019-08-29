@@ -26,8 +26,6 @@ class ReadCsvImageDataSet(Dataset):
         self.validation_index = validation_index_
         self.use_grayscale_mask = use_grayscale_mask
 
-        self.image_paths = None
-        self.vf_patch_paths = None
         self.labels = None
         self.fold_index = None
         self.label_names = None
