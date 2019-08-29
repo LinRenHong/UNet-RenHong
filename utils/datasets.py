@@ -68,14 +68,16 @@ class ReadCsvImageDataSet(Dataset):
             ### let mask become 0 and 255 ###
 
 
-        ### Random horizontal flip ###
-        if random.random() < 0.5:
-            img_A = Image.fromarray(np.array(img_A)[:, ::-1, :], "RGB")
-            img_B = Image.fromarray(np.array(img_B)[:, ::-1, :], "RGB")
-        ### Random horizontal flip ###
 
         ### train ###
         if self.condition.strip() in ["train", "Train", "TRAIN"]:
+
+            ### Random horizontal flip ###
+            if random.random() < 0.5:
+                img_A = Image.fromarray(np.array(img_A)[:, ::-1, :], "RGB")
+                img_B = Image.fromarray(np.array(img_B)[:, ::-1, :], "RGB")
+            ### Random horizontal flip ###
+
             ### Resize ###
             resize = transforms.Resize(size=(opt.img_height, opt.img_width))
             img_A = resize(img_A)
@@ -88,12 +90,12 @@ class ReadCsvImageDataSet(Dataset):
             img_B = transforms.functional.crop(img_B, i, j, h, w)
             ### Random crop ###
 
+            ### Random rotate ###
             if random.random() < 0.5:
-                ### Random rotate ###
                 random_angle = random.randint(-90, 90)
                 img_A = img_A.rotate(random_angle)
                 img_B = img_B.rotate(random_angle)
-                ### Random rotate ###
+            ### Random rotate ###
 
             img_A = transforms.ColorJitter(
                                             # brightness=(32./255.),
