@@ -93,7 +93,7 @@ class ModelCompiler(object):
 
 
         prev_time = time.time()
-        self._best_train_dice = 0.0
+        self._best_val_dice = 0.0
 
         for epoch in range(opt.epoch, opt.n_epochs):
 
@@ -145,14 +145,14 @@ class ModelCompiler(object):
             self._avg_train_dice = total_train_dice / len(self.train_dataloader)
             self._avg_train_psnr = total_train_psnr / len(self.train_dataloader)
 
-            # Save model
-            self.save_model(epoch=epoch)
-
             # write to TensorBoard
             self.write_to_tensorboard(epoch=epoch, condition="train")
 
             # Validate
             self.validate(epoch_done=epoch, is_save_image=True)
+
+            # Save model
+            self.save_model(epoch=epoch)
 
 
     def validate(self, epoch_done, is_save_image=True):
@@ -317,8 +317,8 @@ class ModelCompiler(object):
             torch.save(self.model.state_dict(), os.path.join(self.save_models_dir, "%s/%s_%d.pth" % (self.save_ckpt_name, self.model_name, epoch)))
 
         # Save best model
-        if self._avg_train_dice > self._best_train_dice:
-            self._best_train_dice = self._avg_train_dice
+        if self._avg_val_dice > self._best_val_dice:
+            self._best_val_dice = self._avg_val_dice
             print("\nSave best model to [%s]\n" % self.save_ckpt_name)
             torch.save(self.model.state_dict(), os.path.join(self.save_models_dir, "%s/best_%s_%d.pth" % (self.save_ckpt_name, self.model_name, epoch)))
 
